@@ -4,7 +4,12 @@
   "version" : "0.1.0",
   "author": "Spencer Rinehart",
   "email": "anubis@overthemonkey.com",
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
   "dependencies": {
+    "coffee-script": ">=1.4.0",
     "express": ">=3.0.3"
   }
 }
