@@ -1,0 +1,10 @@
+{
+  "name": "nickknackkrochet.com",
+  "description": "Nick Knack Krochet website",
+  "version" : "0.1.0",
+  "author": "Spencer Rinehart",
+  "email": "anubis@overthemonkey.com",
+  "dependencies": {
+    "express": ">=3.0.3"
+  }
+}
