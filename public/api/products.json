@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Honey Bear",
+    "description": "Everyone's favorite little bear.  This adorable bear is perfect for a little toddler.",
+    "price": "$30 - $40"
+  },
+  {
+    "name": "Frankenstein",
+    "description": "Perfect for halloween, this hat is great for those looking to do the Monster Mash.",
+    "price": "$20 - $25"
+  },
+  {
+    "name": "Robot",
+    "description": "Beep boop bworp!  Can you do the robot?",
+    "price": "$25 - $30"
+  }
+]

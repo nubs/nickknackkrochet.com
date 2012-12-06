@@ -6,6 +6,18 @@
     <title>Nick Knack Krochet</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css" />
     <link rel="stylesheet" href="/styles/style.css" />
+
+    <script type="text/x-handlebars">
+      <div class="row-fluid">
+        {{#collection contentBinding="NKK.productsController" tagName="ul" classNames="thumbnails" itemClassNames="span3"}}
+          <div class="thumbnail">
+            <span class="pull-right">{{view.content.price}}</span>
+            <h3>{{view.content.name}}</h3>
+            <p>{{view.content.description}}</p>
+          </div>
+        {{/collection}}
+      </div>
+    </script>
   </head>
   <body>
     <div class="hero-unit">
@@ -14,12 +26,17 @@
         In the meantime, check us out on <a href="http://www.facebook.com/NickKnackKrochet">facebook</a>.
       </p>
     </div>
+
     <footer class="navbar navbar-fixed-bottom">
       <div class="navbar-inner">
         <div><small><a href="http://www.facebook.com/NickKnackKrochet">Facebook</a> &mdash; <a href="mailto:jennifer@nickknackkrochet.com">Email</a> &mdash; <a href="tel:+17577528880">(757) 752-8880</a></small></div>
         <div><small>&copy;2012 Nick Knack Krochet</small></div>
       </div>
     </footer>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.rc.1/handlebars.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-pre.2/ember-1.0.0-pre.2.min.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_require', 'inpage_linkid', '//www.google-analytics.com/plugins/ga/inpage_linkid.js']);
