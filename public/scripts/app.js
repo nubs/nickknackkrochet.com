@@ -5,7 +5,7 @@
     content: [],
   }),
 
-  $.getJSON('/api/products.json', function(products) {
+  $.getJSON('/api/products', function(products) {
     app.productsController.setObjects(products);
   });
 
