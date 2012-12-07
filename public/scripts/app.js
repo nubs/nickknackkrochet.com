@@ -1,5 +1,5 @@
 (function(win) {
-  var app = Ember.Application.create();
+  var app = Ember.Application.create({rootElement: '#app'});
 
   app.productsController = Ember.ArrayController.create({
     content: [],
