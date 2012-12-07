@@ -10,5 +10,10 @@ productSchema = new mongoose.Schema
   price:
     type: String
     required: true
+  pictures: [{
+    small:
+      type: String
+      required: true
+  }]
 
 module.exports = mongoose.model 'Product', productSchema
