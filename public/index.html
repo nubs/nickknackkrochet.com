@@ -12,9 +12,9 @@
         {{#collection contentBinding="NKK.productsController" tagName="ul" classNames="thumbnails" itemClassNames="span3"}}
           <div class="thumbnail">
             <img {{bindAttr src="view.content.pictures.0.small"}} />
-            <span class="pull-right">{{view.content.price}}</span>
             <h3>{{view.content.name}}</h3>
             <p>{{view.content.description}}</p>
+            <p>{{view.content.price}}</p>
           </div>
         {{/collection}}
       </div>
