@@ -6,9 +6,14 @@
     <title>Nick Knack Krochet</title>
     <link rel="stylesheet" href="/styles/style.css" />
 
-    <script type="text/x-handlebars">
+    <script type="text/x-handlebars" data-template-name="application">
+      {{outlet header}}
+      {{outlet body}}
+      {{outlet footer}}
+    </script>
+    <script type="text/x-handlebars" data-template-name="products">
       <div class="row-fluid">
-        {{#collection contentBinding="NKK.productsController" tagName="ul" classNames="thumbnails" itemClassNames="span3"}}
+        {{#collection contentBinding="content" tagName="ul" classNames="thumbnails" itemClassNames="span3"}}
           <div class="thumbnail well">
             <img {{bindAttr src="view.content.pictures.0.small"}} />
             <h3>{{view.content.name}}</h3>
@@ -18,23 +23,24 @@
         {{/collection}}
       </div>
     </script>
+    <script type="text/x-handlebars" data-template-name="comingSoon">
+      <div class="hero-unit">
+        <h1>Coming Soon</h1>
+        <p>
+          In the meantime, check us out on <a href="http://www.facebook.com/NickKnackKrochet">facebook</a>.
+        </p>
+      </div>
+    </script>
+    <script type="text/x-handlebars" data-template-name="copyright">
+      <footer class="navbar navbar-fixed-bottom">
+        <div class="navbar-inner">
+          <div><small><a class="navbar-link" href="http://www.facebook.com/NickKnackKrochet">Facebook</a> &mdash; <a class="navbar-link" href="mailto:jennifer@nickknackkrochet.com">Email</a> &mdash; <a class="navbar-link" href="tel:+17577528880">(757) 752-8880</a></small></div>
+          <div><small>&copy;2012 Nick Knack Krochet</small></div>
+        </div>
+      </footer>
+    </script>
   </head>
   <body>
-    <div class="hero-unit">
-      <h1>Coming Soon</h1>
-      <p>
-        In the meantime, check us out on <a href="http://www.facebook.com/NickKnackKrochet">facebook</a>.
-      </p>
-    </div>
-
-    <div id="app"></div>
-
-    <footer class="navbar navbar-fixed-bottom">
-      <div class="navbar-inner">
-        <div><small><a class="navbar-link" href="http://www.facebook.com/NickKnackKrochet">Facebook</a> &mdash; <a class="navbar-link" href="mailto:jennifer@nickknackkrochet.com">Email</a> &mdash; <a class="navbar-link" href="tel:+17577528880">(757) 752-8880</a></small></div>
-        <div><small>&copy;2012 Nick Knack Krochet</small></div>
-      </div>
-    </footer>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.rc.1/handlebars.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0-pre.2/ember-1.0.0-pre.2.min.js"></script>
