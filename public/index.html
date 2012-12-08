@@ -4,13 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width; initial-scale=1.0" />
     <title>Nick Knack Krochet</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap.no-icons.min.css" />
     <link rel="stylesheet" href="/styles/style.css" />
 
     <script type="text/x-handlebars">
       <div class="row-fluid">
         {{#collection contentBinding="NKK.productsController" tagName="ul" classNames="thumbnails" itemClassNames="span3"}}
-          <div class="thumbnail">
+          <div class="thumbnail well">
             <img {{bindAttr src="view.content.pictures.0.small"}} />
             <h3>{{view.content.name}}</h3>
             <p>{{view.content.description}}</p>
@@ -32,7 +31,7 @@
 
     <footer class="navbar navbar-fixed-bottom">
       <div class="navbar-inner">
-        <div><small><a href="http://www.facebook.com/NickKnackKrochet">Facebook</a> &mdash; <a href="mailto:jennifer@nickknackkrochet.com">Email</a> &mdash; <a href="tel:+17577528880">(757) 752-8880</a></small></div>
+        <div><small><a class="navbar-link" href="http://www.facebook.com/NickKnackKrochet">Facebook</a> &mdash; <a class="navbar-link" href="mailto:jennifer@nickknackkrochet.com">Email</a> &mdash; <a class="navbar-link" href="tel:+17577528880">(757) 752-8880</a></small></div>
         <div><small>&copy;2012 Nick Knack Krochet</small></div>
       </div>
     </footer>
