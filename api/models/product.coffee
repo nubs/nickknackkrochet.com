@@ -14,6 +14,9 @@ productSchema = new mongoose.Schema
     small:
       type: String
       required: true
+    large:
+      type: String
+      required: true
   }]
 
 module.exports = mongoose.model 'Product', productSchema
