@@ -14,7 +14,7 @@
     <script type="text/x-handlebars" data-template-name="products">
       <div class="row-fluid">
         {{#collection contentBinding="content" tagName="ul" classNames="thumbnails" itemClassNames="span3"}}
-          <div {{action showProduct view.content}} class="thumbnail well">
+          <div {{action showProduct view.content}} class="thumbnail well link">
             <img {{bindAttr src="view.content.pictures.0.small"}} />
             <h3>{{view.content.name}}</h3>
             <p>{{view.content.description}}</p>
@@ -25,7 +25,7 @@
     </script>
     <script type="text/x-handlebars" data-template-name="product">
       <div class="row-fluid">
-        <div {{action goHome}} class="hero-unit span6 offset3">
+        <div {{action goHome}} class="hero-unit span6 offset3 link">
           <img {{bindAttr src="content.pictures.0.large"}} style="width: 100%;" />
           <h3>{{content.name}}</h3>
             <p>{{content.description}}</p>
