@@ -18,5 +18,13 @@ productSchema = new mongoose.Schema
       type: String
       required: true
   }]
+  sizes: [{
+    name:
+      type: String
+      require: true
+    price:
+      type: String
+      require: true
+  }]
 
 module.exports = mongoose.model 'Product', productSchema

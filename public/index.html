@@ -29,7 +29,16 @@
           <img {{bindAttr src="content.pictures.0.large"}} style="width: 100%;" />
           <h3>{{content.name}}</h3>
             <p>{{content.description}}</p>
-            <p>{{content.price}}</p>
+            {{#if content.sizes}}
+              <dl class="dl-horizontal">
+                {{#each size in content.sizes}}
+                  <dt>{{size.name}}</dt>
+                  <dd>{{size.price}}</dd>
+                {{/each}}
+              </dl>
+            {{else}}
+              <p>{{content.price}}</p>
+            {{/if}}
         </div>
       </div>
     </script>
