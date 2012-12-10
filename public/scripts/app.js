@@ -1,4 +1,14 @@
 (function(win) {
+  // Make sure pageviews are tracked even on this 1-page site.
+  Ember.Route.reopen({
+    enter: function(router) {
+      this._super(router);
+      if (this.get('isLeafRoute')) {
+        _gaq.push(['_trackPageview', this.absoluteRoute(router)]);
+      }
+    }
+  });
+
   var app = Ember.Application.create();
 
   app.Product = Ember.Object.extend();
