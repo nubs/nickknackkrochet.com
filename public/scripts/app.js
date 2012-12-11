@@ -1,14 +1,4 @@
 (function(win) {
-  // Make sure pageviews are tracked even on this 1-page site.
-  Ember.Route.reopen({
-    enter: function(router) {
-      this._super(router);
-      if (this.get('isLeafRoute')) {
-        _gaq.push(['_trackPageview', this.absoluteRoute(router)]);
-      }
-    }
-  });
-
   var app = Ember.Application.create();
 
   app.Product = Ember.Object.extend();
@@ -60,6 +50,7 @@
       index: Ember.Route.extend({
         route: '/',
         connectOutlets: function(router, context) {
+          mixpanel.track('view index', context);
           router.get('applicationController').connectOutlet('header', 'comingSoon');
           router.get('applicationController').connectOutlet('body', 'products', app.Product.all());
           router.get('applicationController').connectOutlet('footer', 'copyright');
@@ -77,6 +68,7 @@
           },
 
           connectOutlets: function(router, context) {
+            mixpanel.track('view product', {name: context.name});
             router.get('applicationController').connectOutlet('header', 'comingSoon');
             router.get('applicationController').connectOutlet('body', 'product', context);
             router.get('applicationController').connectOutlet('footer', 'copyright');
