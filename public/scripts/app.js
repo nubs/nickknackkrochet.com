@@ -47,18 +47,25 @@
     root: Ember.Route.extend({
       goHome: Ember.Route.transitionTo('index'),
       showProduct: Ember.Route.transitionTo('products.product'),
+
       index: Ember.Route.extend({
         route: '/',
-        connectOutlets: function(router, context) {
-          mixpanel.track('view index', context);
-          router.get('applicationController').connectOutlet('header', 'comingSoon');
-          router.get('applicationController').connectOutlet('body', 'products', app.Product.all());
-          router.get('applicationController').connectOutlet('footer', 'copyright');
-        }
+        redirectsTo: 'products.index',
       }),
 
       products: Ember.Route.extend({
         route: '/products',
+
+        index: Ember.Route.extend({
+          route: '/',
+
+          connectOutlets: function(router, context) {
+            mixpanel.track('view products');
+            router.get('applicationController').connectOutlet('header', 'comingSoon');
+            router.get('applicationController').connectOutlet('body', 'products', app.Product.all());
+            router.get('applicationController').connectOutlet('footer', 'copyright');
+          }
+        }),
 
         product: Ember.Route.extend({
           route: '/:name',
