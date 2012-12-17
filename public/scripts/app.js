@@ -2,39 +2,21 @@
   var app = Ember.Application.create();
 
   app.Product = Ember.Object.extend();
-  app.Product.reopenClass({
-    _listOfProducts: Ember.A(),
-    all: function() {
-      if (this._listOfProducts.length == 0) {
-        var allProducts = this._listOfProducts;
-
-        $.getJSON('/api/products', function(products) {
-          allProducts.setObjects(products);
-        });
-      }
-
-      return this._listOfProducts;
-    },
-    find: function(name) {
-      var product = app.Product.create({name: name});
-
-      if (this._listOfProducts.length == 0) {
-        var allProducts = this._listOfProducts;
-
-        $.getJSON('/api/products', function(products) {
-          allProducts.setObjects(products);
-          product.setProperties(allProducts.findProperty('name', name));
-        });
-      } else {
-        product.setProperties(this._listOfProducts.findProperty('name', name));
-      }
-
-      return product;
-    }
-  });
 
   app.ApplicationController = Ember.Controller.extend();
-  app.ProductsController = Ember.ArrayController.extend();
+  app.ProductsController = Ember.ArrayController.extend({
+    content: [],
+
+    init: function() {
+      this._super.apply(this, arguments);
+
+      var self = this;
+      $.getJSON('/api/products', function(products) {
+        self.setObjects(products);
+      });
+    },
+  });
+
   app.ProductController = Ember.ObjectController.extend();
 
   app.ApplicationView = Ember.View.extend({templateName: 'application'});
@@ -47,6 +29,8 @@
     root: Ember.Route.extend({
       goHome: Ember.Route.transitionTo('index'),
       showProduct: Ember.Route.transitionTo('products.product'),
+
+      loading: Ember.State.extend(),
 
       index: Ember.Route.extend({
         route: '/',
@@ -62,7 +46,7 @@
           connectOutlets: function(router, context) {
             mixpanel.track('view products');
             router.get('applicationController').connectOutlet('header', 'comingSoon');
-            router.get('applicationController').connectOutlet('body', 'products', app.Product.all());
+            router.get('applicationController').connectOutlet('body', 'products');
             router.get('applicationController').connectOutlet('footer', 'copyright');
           }
         }),
@@ -71,7 +55,22 @@
           route: '/:name',
 
           deserialize: function(router, context) {
-            return app.Product.find(context.name);
+            var products = router.get('productsController');
+            var deferred = $.Deferred();
+            var observer = function() {
+              if (products.get('length')) {
+                products.removeObserver('length', observer);
+                deferred.resolve(products.findProperty('name', context.name));
+              }
+            };
+
+            if (products.get('length')) {
+              deferred.resolve(products.findProperty('name', context.name));
+            } else {
+              products.addObserver('length', observer);
+            }
+
+            return deferred.promise();
           },
 
           connectOutlets: function(router, context) {
