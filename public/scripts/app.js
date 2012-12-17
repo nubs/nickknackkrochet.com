@@ -40,14 +40,17 @@
       products: Ember.Route.extend({
         route: '/products',
 
+        connectOutlets: function(router, context) {
+          router.get('applicationController').connectOutlet('header', 'comingSoon');
+          router.get('applicationController').connectOutlet('footer', 'copyright');
+        },
+
         index: Ember.Route.extend({
           route: '/',
 
           connectOutlets: function(router, context) {
             mixpanel.track('view products');
-            router.get('applicationController').connectOutlet('header', 'comingSoon');
             router.get('applicationController').connectOutlet('body', 'products');
-            router.get('applicationController').connectOutlet('footer', 'copyright');
           }
         }),
 
@@ -75,9 +78,7 @@
 
           connectOutlets: function(router, context) {
             mixpanel.track('view product', {name: context.name});
-            router.get('applicationController').connectOutlet('header', 'comingSoon');
             router.get('applicationController').connectOutlet('body', 'product', context);
-            router.get('applicationController').connectOutlet('footer', 'copyright');
           }
         })
       })
