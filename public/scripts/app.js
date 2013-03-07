@@ -1,89 +1,80 @@
 (function(win) {
   var app = Ember.Application.create();
 
-  app.Product = Ember.Object.extend();
-
-  app.ApplicationController = Ember.Controller.extend();
-  app.ProductsController = Ember.ArrayController.extend({
-    content: [],
-
-    init: function() {
-      this._super.apply(this, arguments);
-
-      var self = this;
-      $.getJSON('/api/products', function(products) {
-        self.setObjects(products);
-      });
-    },
+  app.Product = DS.Model.extend({
+    name: DS.attr('string'),
+    description: DS.attr('string'),
+    price: DS.attr('string'),
+    pictures: DS.hasMany('NKK.Picture'),
+    sizes: DS.hasMany('NKK.Size'),
+    primaryPicture: function() {
+      return this.get('pictures').objectAt(0);
+    }.property('pictures.0'),
   });
 
-  app.ProductController = Ember.ObjectController.extend();
+  app.Picture = DS.Model.extend({
+    small: DS.attr('string'),
+    large: DS.attr('string')
+  });
 
-  app.ApplicationView = Ember.View.extend({templateName: 'application'});
-  app.ComingSoonView = Ember.View.extend({templateName: 'comingSoon'});
-  app.CopyrightView = Ember.View.extend({templateName: 'copyright'});
-  app.ProductsView = Ember.View.extend({templateName: 'products'});
-  app.ProductView = Ember.View.extend({templateName: 'product'});
+  app.Size = DS.Model.extend({
+    name: DS.attr('string'),
+    price: DS.attr('string')
+  });
 
-  app.Router = Ember.Router.extend({
-    root: Ember.Route.extend({
-      goHome: Ember.Route.transitionTo('index'),
-      showProduct: Ember.Route.transitionTo('products.product'),
-
-      loading: Ember.State.extend(),
-
-      index: Ember.Route.extend({
-        route: '/',
-        redirectsTo: 'products.index',
-      }),
-
-      products: Ember.Route.extend({
-        route: '/products',
-
-        connectOutlets: function(router, context) {
-          router.get('applicationController').connectOutlet('header', 'comingSoon');
-          router.get('applicationController').connectOutlet('footer', 'copyright');
-        },
-
-        index: Ember.Route.extend({
-          route: '/',
-
-          connectOutlets: function(router, context) {
-            mixpanel.track('view products');
-            router.get('applicationController').connectOutlet('body', 'products');
-          }
-        }),
-
-        product: Ember.Route.extend({
-          route: '/:name',
-
-          deserialize: function(router, context) {
-            var products = router.get('productsController');
-            var deferred = $.Deferred();
-            var observer = function() {
-              if (products.get('length')) {
-                products.removeObserver('length', observer);
-                deferred.resolve(products.findProperty('name', context.name));
-              }
-            };
-
-            if (products.get('length')) {
-              deferred.resolve(products.findProperty('name', context.name));
-            } else {
-              products.addObserver('length', observer);
-            }
-
-            return deferred.promise();
-          },
-
-          connectOutlets: function(router, context) {
-            mixpanel.track('view product', {name: context.name});
-            router.get('applicationController').connectOutlet('body', 'product', context);
-          }
-        })
+  app.RESTAdapter = DS.RESTAdapter.extend({
+    namespace: 'api',
+      serializer: DS.RESTSerializer.extend({
+        primaryKey: function(type) {
+          return '_id';
+        }
       })
-    })
   });
+
+  app.RESTAdapter.map(app.Product, {
+    pictures: {embedded: 'always'},
+    sizes: {embedded: 'always'}
+  });
+
+  app.Store = DS.Store.extend({
+    revision: 11,
+    adapter: app.RESTAdapter
+  });
+
+  app.Router.map(function() {
+    this.resource('products', {path: '/'}, function() {
+      this.resource('product', {path: '/:product_id'});
+    });
+  });
+
+  app.ProductsRoute = Ember.Route.extend({
+    events: {
+      showProduct: function(product) {
+        this.transitionTo('product', product);
+      },
+      goHome: function() {
+        this.transitionTo('products');
+      }
+    },
+    model: function() {
+      return app.Product.find({});
+    }
+  });
+
+  app.ProductsIndexRoute = Ember.Route.extend({
+    setupController: function(controller, model) {
+      mixpanel.track('view products');
+    },
+    model: function() {
+      return this.modelFor('products');
+    }
+  });
+
+	app.ProductRoute = Ember.Route.extend({
+    setupController: function(controller, model) {
+      mixpanel.track('view product', {name: model.get('name')});
+    }
+	});
 
   win.NKK = app;
 })(window);

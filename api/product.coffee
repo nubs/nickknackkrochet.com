@@ -5,4 +5,4 @@ Product = require './models/product'
 
 app.get '/', (req, res) ->
   Product.find (err, products) ->
-    res.send products
+    res.send products: products
