@@ -6,7 +6,7 @@
     <title>Nick Knack Krochet</title>
     <link rel="stylesheet" href="/styles/style.css" />
 
-    <script type="text/x-handlebars" data-template-name="products">
+    <script type="text/x-handlebars" data-template-name="application">
       <div class="hero-unit">
         <h1>Coming Soon</h1>
         <p>
@@ -25,6 +25,7 @@
         </div>
       </footer>
     </script>
+
     <script type="text/x-handlebars" data-template-name="products/index">
       {{#collection contentBinding="content" tagName="ul" classNames="thumbnails" itemClassNames="span3"}}
         <div {{action showProduct view.content}} class="thumbnail well link">
@@ -35,6 +36,7 @@
         </div>
       {{/collection}}
     </script>
+
     <script type="text/x-handlebars" data-template-name="product">
       <div class="row-fluid">
         <div {{action goHome}} class="hero-unit span6 offset3 link">
