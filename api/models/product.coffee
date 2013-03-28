@@ -26,5 +26,10 @@ productSchema = new mongoose.Schema
       type: String
       require: true
   }]
+  tags: [{
+    name:
+      type: String
+      require: true
+  }]
 
 module.exports = mongoose.model 'Product', productSchema

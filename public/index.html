@@ -7,13 +7,6 @@
     <link rel="stylesheet" href="/styles/style.css" />
 
     <script type="text/x-handlebars" data-template-name="application">
-      <div class="hero-unit">
-        <h1>Coming Soon</h1>
-        <p>
-          In the meantime, check us out on <a href="http://www.facebook.com/NickKnackKrochet">facebook</a>.
-        </p>
-      </div>
-
       <div class="row-fluid">
         {{outlet}}
       </div>
@@ -26,7 +19,17 @@
       </footer>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="products/index">
+    <script type="text/x-handlebars" data-template-name="tags/index">
+      <div class="navbar">
+        <div class="navbar-inner">
+          {{#collection contentBinding="content" tagName="ul" classNames="nav"}}
+            <a {{action showTag view.content}}>{{view.content.name}}</a>
+          {{/collection}}
+        </div>
+      </div>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="tag/products">
       {{#collection contentBinding="content" tagName="ul" classNames="thumbnails" itemClassNames="span3"}}
         <div {{action showProduct view.content}} class="thumbnail well link">
           <img {{bindAttr src="view.content.primaryPicture.small"}} />
