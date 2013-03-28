@@ -51,7 +51,8 @@
     this.resource('root', {path: '/'}, function() {
       this.resource('tags', {path: '/'}, function() {
         this.resource('tag', {path: '/:tag_name'}, function() {
-          this.route('products', {path: '/products'});
+          this.resource('products', {path: '/products'}, function() {
+          });
         });
 
         this.resource('product', {path: '/products/:product_id'});
@@ -68,7 +69,7 @@
         this.transitionTo('product', product);
       },
       showTag: function(tag) {
-        this.transitionTo('tag.products', tag);
+        this.transitionTo('products', tag);
       },
       goHome: function() {
         this.transitionTo('tags');
@@ -111,7 +112,7 @@
     }
   });
 
-  app.TagProductsRoute = Ember.Route.extend({
+  app.ProductsRoute = Ember.Route.extend({
     setupController: function(controller, model) {
       //mixpanel.track('view products');
     },

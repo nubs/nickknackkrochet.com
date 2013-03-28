@@ -29,7 +29,7 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="tag/products">
+    <script type="text/x-handlebars" data-template-name="products">
       {{#collection contentBinding="content" tagName="ul" classNames="thumbnails" itemClassNames="span3"}}
         <div {{action showProduct view.content}} class="thumbnail well link">
           <img {{bindAttr src="view.content.primaryPicture.small"}} />
