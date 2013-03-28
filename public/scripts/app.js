@@ -69,7 +69,7 @@
         this.transitionTo('product', product);
       },
       showTag: function(tag) {
-        this.transitionTo('products', tag);
+        this.transitionTo('tag', tag);
       },
       goHome: function() {
         this.transitionTo('tags');
@@ -103,6 +103,9 @@
   app.TagRoute = Ember.Route.extend({
     serialize: function(tag) {
       return {tag_name: tag.get('name')};
+    },
+    redirect: function() {
+      this.transitionTo('products', this.get('context'));
     },
     setupController: function(controller, model) {
       //mixpanel.track('view tag');
