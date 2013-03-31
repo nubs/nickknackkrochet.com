@@ -48,7 +48,20 @@
     Priority: Major
     Points: 13
 
-## Backlog
+## Sprint 2
+    #1 - Find products
+    Priority: Major
+    Points: 40
+
+        #15 - Separate products into categories
+        Priority: Minor
+        Points: 20
+
+        #18 - Google Rich Snippets
+        Priority: Minor
+        Points: 13
+
+## Sprint 3
     #1 - Find products
     Priority: Major
     Points: 40
@@ -61,16 +74,13 @@
         Priority: Major
         Points: 13
 
+## Backlog
+    #1 - Find products
+    Priority: Major
+    Points: 40
+
         #14 - Detailing options
         Priority: Major
-        Points: 13
-
-        #15 - Separate products into categories
-        Priority: Minor
-        Points: 20
-
-        #18 - Google Rich Snippets
-        Priority: Minor
         Points: 13
 
 
