@@ -19,7 +19,7 @@
       </footer>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="tags/index">
+    <script type="text/x-handlebars" data-template-name="tags">
       <div class="navbar">
         <div class="navbar-inner">
           {{#collection contentBinding="content" tagName="ul" classNames="nav"}}
@@ -27,6 +27,8 @@
           {{/collection}}
         </div>
       </div>
+
+      {{outlet}}
     </script>
 
     <script type="text/x-handlebars" data-template-name="products">
