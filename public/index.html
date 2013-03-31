@@ -23,7 +23,7 @@
       <div class="navbar">
         <div class="navbar-inner">
           {{#collection contentBinding="content" tagName="ul" classNames="nav"}}
-            <a {{action showTag view.content}}>{{view.content.name}}</a>
+            <a {{action showTag view.content}} class="link">{{view.content.name}}</a>
           {{/collection}}
         </div>
       </div>
@@ -44,7 +44,7 @@
 
     <script type="text/x-handlebars" data-template-name="product">
       <div class="row-fluid">
-        <div class="hero-unit span6 offset3 link">
+        <div class="hero-unit span6 offset3">
           <img {{bindAttr src="content.primaryPicture.large"}} style="width: 100%;" />
           <h3>{{content.name}}</h3>
             <p>{{content.description}}</p>
