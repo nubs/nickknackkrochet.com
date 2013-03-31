@@ -70,9 +70,6 @@
       },
       showTag: function(tag) {
         this.transitionTo('tag', tag);
-      },
-      goHome: function() {
-        this.transitionTo('tags');
       }
     },
 
